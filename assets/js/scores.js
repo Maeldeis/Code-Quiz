@@ -1,16 +1,16 @@
 //variables
-var highScore = document.querySelector (#highScore");
-var clear = document.querySelector (#clear");
-var goBack = document.querySelector(#goBack);  
+var highScore = document.querySelector("#highScore");
+var clear = document.querySelector("#clear");
+var goBack = document.querySelector("#goBack");  
  
 //event listener clear
-clear.addEventListener("click", function ()) {
+clear.addEventListener("click", function () {
     localStorage.clear();
     location.reload();
 });
 
 // inputs local stroage if loop
-var allScores = localStorage.getItem("allScores")
+var allScores = localStorage.getItem("allScores");
 allScores=localStorage.getItem("allScores");
 allScores=JSON.parse(allScores)
 if (allScores !==null) {
@@ -21,3 +21,6 @@ if (allScores !==null) {
          }
         }
 // event listener move to index page
+goBack.addEventListener("click", function () {
+    window.location.replace("./index.html");
+});
