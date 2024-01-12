@@ -1,0 +1,23 @@
+//function question object
+var questions = [
+    {
+        question:
+        choices:
+        answer:
+
+        question:
+        choices:
+        answer:
+
+        question:
+        choices:
+        answer:
+
+        question:
+        choices:
+        answer:
+    },
+
+
+
+];
