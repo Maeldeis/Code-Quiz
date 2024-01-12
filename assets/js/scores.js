@@ -6,7 +6,7 @@ var goBack = document.querySelector("#goBack");
 //event listener clear
 clear.addEventListener("click", function () {
     localStorage.clear();
-    location.reload();
+    highScore.innerHTML= "";
 });
 
 // inputs local stroage if loop
