@@ -1,23 +1,9 @@
 //function question object
-var questions = [
-    {
-        question:
-        choices:
-        answer:
-
-        question:
-        choices:
-        answer:
-
-        question:
-        choices:
-        answer:
-
-        question:
-        choices:
-        answer:
-    },
-
-
-
-];
+function createQuestion(qText, choices, correct) {
+    return{
+        question: qText,
+        choices: choices,
+        answer: correct
+    };
+    
+}
