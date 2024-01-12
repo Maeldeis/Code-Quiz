@@ -7,3 +7,9 @@ function createQuestion(qText, choices, correct) {
     };
     
 }
+//question object array
+var questions = [
+    createQuestion("first question?",["choice1","choice2"], "choice2"),
+    createQuestion("first question?",["choice1","choice2"], "choice1"),
+    createQuestion("first question?",["choice1","choice2"], "choice2"),
+];
