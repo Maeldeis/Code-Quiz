@@ -18,3 +18,4 @@ var penalty = 0;
 //time remaining and score
 
 //
+console.log("hello");

@@ -16,9 +16,7 @@ var questions = [
         choices:["x","y"],
         answer:"x"
     },
- 
+ ];
 
-
-];
-
+ document.getElementById("start")
 
