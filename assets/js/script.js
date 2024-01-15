@@ -45,3 +45,16 @@ timer.addEventListener("click", function() {
     }
     render(questionI);
 });
+
+
+// submitting scores
+var storedScores = localStorage.getItem("scores");
+var scores = storedScores ? JSON.parse(storedScores):[];
+var playerI = initials.value;
+var playerData = { 
+    initials: playerI,
+    score:score,
+};
+scores.push(playerData);
+localStorage.setItem("scores",JSON.stringify(scores));
+window.location.href = "highscores.html";
