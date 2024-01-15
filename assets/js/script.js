@@ -29,3 +29,19 @@ var secondsLeft = 60;
 var holdInterval = 0;
 var penalty = 5;
 var ulCreate = document.createElement ("ul");
+
+//button timer trigger
+timer.addEventListener("click", function() {
+    if (holdInterval === 0) {
+        holdInterval = setInterval(function() {
+            secondsLeft--;
+            currentTime.textContent = "Time: " + secondsLeft;
+            if (secondsLeft <= 0) {
+                clearInterval(holdInterval);
+                allDone();
+                currentTime.textContent = "Time up";
+            }
+        }, 1000);
+    }
+    render(questionI);
+});
