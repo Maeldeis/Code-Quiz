@@ -30,6 +30,9 @@ var holdInterval = 0;
 var penalty = 5;
 var ulCreate = document.createElement ("ul");
 
+timerButton.addEventListener("click", function (){
+    startTimer();
+});
 //button timer trigger
 timer.addEventListener("click", function() {
     if (holdInterval === 0) {
