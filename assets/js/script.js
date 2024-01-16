@@ -67,8 +67,17 @@ for (var i = 0; i < choices.length; i++) {
 }
 }
 function setTime(){
-
+var timerInterval = setInterval(FUNCTION (){
+    secondsLeft--;
+    currentTime.textContent="Times"+secondsLeft;
+    if(secondsLeft  <=0){
+        clearInterval(timerInterval);
+        endQuiz();
+    }
+},1000);
 }
 function storeScore(){
-
+    finalScores.textContent = "Final Score: " + score;
+    endScreenEl.classList.remove("hide");
+    questionsDiv.classList.add("hide");
 }
