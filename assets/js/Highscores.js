@@ -1,4 +1,4 @@
-//variables
+
 var highScore = document.querySelector("#highScore");
 var clear = document.querySelector("#clear");
 var goBack = document.querySelector("#goBack");  
@@ -9,10 +9,11 @@ clear.addEventListener("click", function () {
     highScore.innerHTML= "";
 });
 
-// inputs local stroage if loop
+
 var allScores = localStorage.getItem("allScores");
 allScores=localStorage.getItem("allScores");
-allScores=JSON.parse(allScores)
+allScores=JSON.parse(allScores);
+
 if (allScores !==null) {
     for (let i = 0; i < allScores.length; i++) {
         var createLi = document.createElement("li");
@@ -20,7 +21,7 @@ if (allScores !==null) {
         highScore.appendChild(createLi);
          }
         }
-// event listener move to index page
+
 goBack.addEventListener("click", function () {
     window.location.replace("./index.html");
 });
