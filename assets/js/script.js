@@ -17,7 +17,7 @@ var questions = [
         answer:"y"
 // my variables from html
 var score = 0;
-var questionI = 0;
+var questionIndex = 0;
 var currentTime = document.querySelector("#currentTime");
 var timer = document.querySelector("#startTime");
 var questionsDiv = document.querySelector("#questionsDiv");
@@ -34,3 +34,29 @@ var finalScores = document.querySelector("#final-score");
 var feedbackEl = document.querySelector("#feedback");
 var submit = document.querySelector("#submit");
 var initialsEl=document.querySelector("#initials");
+
+//event listeners for starting and submitting
+startEl.addEventListener("click",displayQuiz)
+submit.addEventListener("click", storeScore)
+
+//functions
+function    displayQuiz(){
+    questionIndex = 0;
+    secondsLeft = 60;
+    holdInterval;
+    startScreenEl.classList.add("hide");
+    questionsDiv.classList.remove("hide");
+    questionsDiv.classList.add("start")
+    setTime();
+    beginQuestions();
+
+}
+function    beginQuestions(){
+
+}
+function setTime(){
+
+}
+function storeScore(){
+    
+}
