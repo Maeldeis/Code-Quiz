@@ -67,7 +67,45 @@ for (var i = 0; i < choices.length; i++) {
     const buttonHTML = `<button>${choices[i]}</button>`;
     choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
 }
+function checkAnswer(event) {
+    const selectedAnswerText = event.target.textContent;
+    const currentQuestion = questions[currentQuestionIndex];
+
+    if (currentQuestion.isTrueFalse) {
+      const selectedAnswer = selectedAnswerText === "True";
+      const correctAnswer = currentQuestion.correctAnswer;
+      if (selectedAnswer === correctAnswer) {
+        score++;
+        showFeedback("Yep!", "correct");
+        correctSound.play();
+      } else {
+        timeLeft -= 10;
+        showFeedback("Nope!", "wrong");
+        wrongSound.play();    
+      }
+    } else if (currentQuestion.choices) {
+      const selectedAnswer = selectedAnswerText;
+      const correctAnswer = currentQuestion.correctAnswer;
+
+      if (selectedAnswer === correctAnswer) {
+        score++;
+        showFeedback("Correct!", "correct");
+        correctSound.play();
+      } else {
+        timeLeft -= 10;
+        showFeedback("Wrong!", "wrong");
+        wrongSound.play();
+      }
+    }
 }
+currentQuestionIndex++;
+
+    if (currentQuestionIndex < questions.length) {
+      displayQuestion();
+    } else {
+      endQuiz();
+    }
+  
 function startTimer() {
     timerInterval = setInterval(function () {
       timeLeft--;
@@ -90,4 +128,4 @@ function storeScore(){
     finalScores.textContent = "Final Score: " + score;
     endScreenEl.classList.remove("hide");
     questionsDiv.classList.add("hide");
-}
+}}
