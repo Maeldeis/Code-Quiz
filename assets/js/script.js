@@ -25,10 +25,9 @@ document.addEventListener('click', function (event) {
         startQuiz();
     } else if (event.target.id === 'submit') {
         storeScore();
-    } else if (event.target.id === 'highscores') {
+    }  else if (event.target.id === 'scoresLink') {
         showHighScores();
     }
-    // Add more conditions for other elements if needed
 });
 
 
@@ -45,8 +44,9 @@ function displayQuestion() {
     var questionText = currentQuestion.question;
     var choices = currentQuestion.choices;
 
-    var questionTitleEl = document.getElementById("questionTitleEl");
-    var choicesEl = document.getElementById("choicesEl");
+    var questionTitleEl = questionTitle;
+    var choicesEl = choicesContainer;
+    
 
     questionTitleEl.textContent = "Question: " + questionText;
     choicesEl.innerHTML = "";
