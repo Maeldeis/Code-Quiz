@@ -1,131 +1,115 @@
 // Array var object
-
 var questions = [
     {
-        question:"what",
-        choices:["x","y"],
-        answer:"x"
+        question: "what",
+        choices: ["x", "y"],
+        answer: "x"
     },
     {
-        question:"what2",
-        choices:["x","y"],
-        answer:"y"
+        question: "what2",
+        choices: ["x", "y"],
+        answer: "y"
     },
     {
-        question:"what3",
-        choices:["x","y"],
-        answer:"y"
+        question: "what3",
+        choices: ["x", "y"],
+        answer: "y"
     }
 ];
-// my variables from html
+
+// variables from HTML
 var score = 0;
-var startScreen =document.getElementById("start-screen")
-var quizContainer = document.getElementById("questions")
+var startScreen = document.getElementById("start-screen");
+var quizContainer = document.getElementById("questions");
 var questionIndex = 0;
 var choicesContainer = document.getElementById("choices");
 var currentTime = document.querySelector("#currentTime");
-var timer = document.querySelector("#startTime");
+var timerDisplay = document.querySelector("#startTime"); /
 var questionsDiv = document.querySelector("#questionsDiv");
-var wrapper = document.querySelector("#wrapper");
-var secondsLeft = 60;
-var holdInterval = 0;
-var penalty = 5;
-const correctSound = new Audio("./assets/sfx/correct.wav");
-const wrongSound = new Audio ("./assets/sfx/incorrect.wav");
-var startEl = document.querySelector("#start");
-var startScreenEl=document.querySelector("#start-screen");
-var endScreenEl = document.querySelector("#end-screen");
-var finalScores = document.querySelector("#final-score");
-var feedbackEl = document.querySelector("#feedback");
-var submit = document.querySelector("#submit");
-var initialsEl=document.querySelector("#initials");
+var endScreen = document.querySelector("#end-screen"); 
+var finalScore = document.querySelector("#final-score"); 
+var startButton = document.querySelector("#start"); 
+var submitButton = document.querySelector("#submit"); 
+var startScreenEl = document.querySelector("#start-screen");
 var currentQuestionIndex = 0;
 var timerInterval;
-var feedbackContainer=document.getElementById("feedback");
+var feedbackContainer = document.getElementById("feedback");
+var timeLeft = 60; // Assuming you want to start with 60 seconds
 
-//event listeners for starting and submitting
-startButton.addEventListener("click", beginQuestions);
-submitButton.addEventListener("click", saveHighscore);
-scoresLink.addEventListener("click", viewHighscores);
-//functions
-function    beginQuestions(){
+// Event listeners for starting and submitting
+startButton.addEventListener("click", beginQuiz);
+submitButton.addEventListener("click", storeScore);
+
+// Functions
+function beginQuiz() {
     startScreen.classList.add("hide");
     quizContainer.classList.remove("hide");
     shuffleQuestions();
     displayQuestion();
     startTimer();
-  }
-function    beginQuestions(){
-var currentQuestion = questions[questionIndex];
-var questionText = currentQuestion.question;
-var choices=currentQuestion.choices;
-var questionTitleEl=document.getElementById(questionTitleEl);
-var choicesEl=document.getElementById("choicesEl")
-questionTitleEl.textContent = "Question: " + questionText;
-choicesEl.innerHTML = "";
-for (var i = 0; i < choices.length; i++) {
-    const buttonHTML = `<button>${choices[i]}</button>`;
-    choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
 }
+
+function displayQuestion() {
+    var currentQuestion = questions[questionIndex];
+    var questionText = currentQuestion.question;
+    var choices = currentQuestion.choices;
+
+    var questionTitleEl = document.getElementById("questionTitleEl");
+    var choicesEl = document.getElementById("choicesEl");
+
+    questionTitleEl.textContent = "Question: " + questionText;
+    choicesEl.innerHTML = "";
+
+    for (var i = 0; i < choices.length; i++) {
+        const buttonHTML = `<button>${choices[i]}</button>`;
+        choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
+    }
+}
+
 function checkAnswer(event) {
     const selectedAnswerText = event.target.textContent;
     const currentQuestion = questions[currentQuestionIndex];
 
-    if (currentQuestion.isTrueFalse) {
-      const selectedAnswer = selectedAnswerText === "True";
-      const correctAnswer = currentQuestion.correctAnswer;
-      if (selectedAnswer === correctAnswer) {
-        score++;
-        showFeedback("Yep!", "correct");
-        correctSound.play();
-      } else {
-        timeLeft -= 10;
-        showFeedback("Nope!", "wrong");
-        wrongSound.play();    
-      }
-    } else if (currentQuestion.choices) {
-      const selectedAnswer = selectedAnswerText;
-      const correctAnswer = currentQuestion.correctAnswer;
+    if (currentQuestion.choices) {
+        const selectedAnswer = selectedAnswerText;
+        const correctAnswer = currentQuestion.answer;
 
-      if (selectedAnswer === correctAnswer) {
-        score++;
-        showFeedback("Correct!", "correct");
-        correctSound.play();
-      } else {
-        timeLeft -= 10;
-        showFeedback("Wrong!", "wrong");
-        wrongSound.play();
-      }
+        if (selectedAnswer === correctAnswer) {
+            score++;
+            showFeedback("Correct!", "correct");
+        } else {
+            timeLeft -= 10;
+            showFeedback("Wrong!", "wrong");
+        }
     }
-}
-currentQuestionIndex++;
+
+    currentQuestionIndex++;
 
     if (currentQuestionIndex < questions.length) {
-      displayQuestion();
+        displayQuestion();
     } else {
-      endQuiz();
+        endQuiz();
     }
-  
+}
+
 function startTimer() {
     timerInterval = setInterval(function () {
-      timeLeft--;
-      timerDisplay.textContent = timeLeft;
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
 
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        endQuiz();
-      }
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endQuiz();
+        }
     }, 1000);
-  }
-  function endQuiz() {
+}
+
+function endQuiz() {
     clearInterval(timerInterval);
     quizContainer.classList.add("hide");
     endScreen.classList.remove("hide");
-    finalScore.textContent = score;
-  }
+    finalScore.textContent = "Final Score: " + score;
+}
 
-function storeScore(){
-    finalScores.textContent = "Final Score: " + score;
-    endScreenEl.classList.remove("hide");
-    questionsDiv.classList.add("hide");
-}}
+function storeScore() {
+    
