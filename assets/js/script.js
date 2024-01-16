@@ -1,6 +1,3 @@
-
-
-// variables from HTML
 var score = 0;
 var startScreen = document.getElementById("start-screen");
 var quizContainer = document.getElementById("questions");
@@ -19,11 +16,23 @@ var timerInterval;
 var feedbackContainer = document.getElementById("feedback");
 var timeLeft = 60;
 
-// Event listeners for starting and submitting
+
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
 
-// Functions
+import { questions } from './questions.js';
+document.addEventListener('click', function (event) {
+    if (event.target.id === 'start') {
+        startQuiz();
+    } else if (event.target.id === 'submit') {
+        storeScore();
+    } else if (event.target.id === 'highscores') {
+        showHighScores();
+    }
+    // Add more conditions for other elements if needed
+});
+
+
 function startQuiz() {
     startScreen.classList.add("hide");
     quizContainer.classList.remove("hide");
