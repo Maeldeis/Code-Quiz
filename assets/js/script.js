@@ -19,7 +19,10 @@ var questions = [
 ];
 // my variables from html
 var score = 0;
+var startScreen =document.getElementById("start-screen")
+var quizContainer = document.getElementById("questions")
 var questionIndex = 0;
+var choicesContainer = document.getElementById("choices");
 var currentTime = document.querySelector("#currentTime");
 var timer = document.querySelector("#startTime");
 var questionsDiv = document.querySelector("#questionsDiv");
@@ -36,13 +39,16 @@ var finalScores = document.querySelector("#final-score");
 var feedbackEl = document.querySelector("#feedback");
 var submit = document.querySelector("#submit");
 var initialsEl=document.querySelector("#initials");
+var currentQuestionIndex = 0;
+var timerInterval;
+var feedbackContainer=document.getElementById("feedback");
 
 //event listeners for starting and submitting
-startEl.addEventListener("click",displayQuiz)
-submit.addEventListener("click", storeScore)
-
+startButton.addEventListener("click", startQuiz);
+submitButton.addEventListener("click", saveHighscore);
+scoresLink.addEventListener("click", viewHighscores);
 //functions
-function    displayQuiz(){
+function    beginQuestions(){
     questionIndex = 0;
     secondsLeft = 60;
     holdInterval;
@@ -50,7 +56,6 @@ function    displayQuiz(){
     questionsDiv.classList.remove("hide");
     questionsDiv.classList.add("start")
     setTime();
-    beginQuestions();
 
 }
 function    beginQuestions(){
@@ -67,9 +72,9 @@ for (var i = 0; i < choices.length; i++) {
 }
 }
 function setTime(){
-var timerInterval = setInterval(FUNCTION (){
+var timerInterval = setInterval(function (){
     secondsLeft--;
-    currentTime.textContent="Times"+secondsLeft;
+    currentTime.textContent="Time"+secondsLeft;
     if(secondsLeft  <=0){
         clearInterval(timerInterval);
         endQuiz();
