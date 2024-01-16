@@ -1,47 +1,30 @@
-// Array var object
-var questions = [
-    {
-        question: "what",
-        choices: ["x", "y"],
-        answer: "x"
-    },
-    {
-        question: "what2",
-        choices: ["x", "y"],
-        answer: "y"
-    },
-    {
-        question: "what3",
-        choices: ["x", "y"],
-        answer: "y"
-    }
-];
+
 
 // variables from HTML
 var score = 0;
 var startScreen = document.getElementById("start-screen");
 var quizContainer = document.getElementById("questions");
-var questionIndex = 0;
+var questionTitle = document.getElementById("question-title");
 var choicesContainer = document.getElementById("choices");
-var currentTime = document.querySelector("#currentTime");
-var timerDisplay = document.querySelector("#startTime"); /
-var questionsDiv = document.querySelector("#questionsDiv");
-var endScreen = document.querySelector("#end-screen"); 
-var finalScore = document.querySelector("#final-score"); 
-var startButton = document.querySelector("#start"); 
-var submitButton = document.querySelector("#submit"); 
-var startScreenEl = document.querySelector("#start-screen");
+var endScreen = document.getElementById("end-screen");
+var finalScore = document.getElementById("final-score");
+var initialsInput = document.getElementById("initials");
+var submitButton = document.getElementById("submit");
+var timerDisplay = document.getElementById("time");
+var startButton = document.getElementById("start");
+var feedbackContainer = document.getElementById("feedback");
+var scoresLink = document.querySelector("highscores");
 var currentQuestionIndex = 0;
 var timerInterval;
 var feedbackContainer = document.getElementById("feedback");
-var timeLeft = 60; // Assuming you want to start with 60 seconds
+var timeLeft = 60;
 
 // Event listeners for starting and submitting
-startButton.addEventListener("click", beginQuiz);
+startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
 
 // Functions
-function beginQuiz() {
+function startQuiz() {
     startScreen.classList.add("hide");
     quizContainer.classList.remove("hide");
     shuffleQuestions();
@@ -50,7 +33,7 @@ function beginQuiz() {
 }
 
 function displayQuestion() {
-    var currentQuestion = questions[questionIndex];
+    var currentQuestion = questions[currentQuestionIndex];
     var questionText = currentQuestion.question;
     var choices = currentQuestion.choices;
 
@@ -61,18 +44,23 @@ function displayQuestion() {
     choicesEl.innerHTML = "";
 
     for (var i = 0; i < choices.length; i++) {
-        const buttonHTML = `<button>${choices[i]}</button>`;
+        var buttonHTML = `<button>${choices[i]}</button>`;
         choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
     }
+
+    var choiceButtons = document.querySelectorAll("#choicesEl button");
+    choiceButtons.forEach(function (button) {
+        button.addEventListener("click", checkAnswer);
+    });
 }
 
 function checkAnswer(event) {
-    const selectedAnswerText = event.target.textContent;
-    const currentQuestion = questions[currentQuestionIndex];
+    var selectedAnswerText = event.target.textContent;
+    var currentQuestion = questions[currentQuestionIndex];
 
     if (currentQuestion.choices) {
-        const selectedAnswer = selectedAnswerText;
-        const correctAnswer = currentQuestion.answer;
+        var selectedAnswer = selectedAnswerText;
+        var correctAnswer = currentQuestion.answer;
 
         if (selectedAnswer === correctAnswer) {
             score++;
