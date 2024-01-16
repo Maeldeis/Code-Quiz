@@ -1,5 +1,9 @@
 # Code-Quiz
 
+https://maeldeis.github.io/Code-Quiz/
+https://github.com/Maeldeis/Code-Quiz
+
+
 ## Interactive and dynamic coding quiz with web API's.
 
 A timed coding quiz with multiple-choice questions. This app will run in the browser, and will feature dynamically updated HTML and CSS powered by JavaScript code. It will have a clean, polished, and responsive user interface.
