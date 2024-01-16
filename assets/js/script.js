@@ -44,20 +44,17 @@ var timerInterval;
 var feedbackContainer=document.getElementById("feedback");
 
 //event listeners for starting and submitting
-startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", beginQuestions);
 submitButton.addEventListener("click", saveHighscore);
 scoresLink.addEventListener("click", viewHighscores);
 //functions
 function    beginQuestions(){
-    questionIndex = 0;
-    secondsLeft = 60;
-    holdInterval;
-    startScreenEl.classList.add("hide");
-    questionsDiv.classList.remove("hide");
-    questionsDiv.classList.add("start")
-    setTime();
-
-}
+    startScreen.classList.add("hide");
+    quizContainer.classList.remove("hide");
+    shuffleQuestions();
+    displayQuestion();
+    startTimer();
+  }
 function    beginQuestions(){
 var currentQuestion = questions[questionIndex];
 var questionText = currentQuestion.question;
@@ -71,16 +68,24 @@ for (var i = 0; i < choices.length; i++) {
     choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
 }
 }
-function setTime(){
-var timerInterval = setInterval(function (){
-    secondsLeft--;
-    currentTime.textContent="Time"+secondsLeft;
-    if(secondsLeft  <=0){
+function startTimer() {
+    timerInterval = setInterval(function () {
+      timeLeft--;
+      timerDisplay.textContent = timeLeft;
+
+      if (timeLeft <= 0) {
         clearInterval(timerInterval);
         endQuiz();
-    }
-},1000);
-}
+      }
+    }, 1000);
+  }
+  function endQuiz() {
+    clearInterval(timerInterval);
+    quizContainer.classList.add("hide");
+    endScreen.classList.remove("hide");
+    finalScore.textContent = score;
+  }
+
 function storeScore(){
     finalScores.textContent = "Final Score: " + score;
     endScreenEl.classList.remove("hide");
