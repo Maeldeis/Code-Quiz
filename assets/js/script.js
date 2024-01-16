@@ -15,6 +15,8 @@ var questions = [
         question:"what3",
         choices:["x","y"],
         answer:"y"
+    }
+];
 // my variables from html
 var score = 0;
 var questionIndex = 0;
@@ -52,16 +54,17 @@ function    displayQuiz(){
 
 }
 function    beginQuestions(){
-var currentQuestion = questions[currentQuestionIndex];
-var questionText = currentQuestion .question;
+var currentQuestion = questions[questionIndex];
+var questionText = currentQuestion.question;
 var choices=currentQuestion.choices;
-questionTitleEl.textContent="Question:${questionText}";
-for (let choiceKey in choices) {
-    const buttonHTML = `<button>${choiceKey}: ${choices[choiceKey]}</button>`;
+var questionTitleEl=document.getElementById(questionTitleEl);
+var choicesEl=document.getElementById("choicesEl")
+questionTitleEl.textContent = "Question: " + questionText;
+choicesEl.innerHTML = "";
+for (var i = 0; i < choices.length; i++) {
+    const buttonHTML = `<button>${choices[i]}</button>`;
     choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
 }
-
-
 }
 function setTime(){
 
