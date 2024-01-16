@@ -52,11 +52,20 @@ function    displayQuiz(){
 
 }
 function    beginQuestions(){
+var currentQuestion = questions[currentQuestionIndex];
+var questionText = currentQuestion .question;
+var choices=currentQuestion.choices;
+questionTitleEl.textContent="Question:${questionText}";
+for (let choiceKey in choices) {
+    const buttonHTML = `<button>${choiceKey}: ${choices[choiceKey]}</button>`;
+    choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
+}
+
 
 }
 function setTime(){
 
 }
 function storeScore(){
-    
+
 }
