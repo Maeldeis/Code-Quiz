@@ -100,4 +100,58 @@ function endQuiz() {
 }
 
 function storeScore() {
-    
+    var userInitials = initialsInput.value.trim();
+
+    if (userInitials !== "") {
+        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        var newScore = {
+            initials: userInitials,
+            score: score
+        };
+
+        highScores.push(newScore);
+        highScores.sort(function (a, b) {
+            return b.score - a.score;
+        });
+
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        showHighScores();
+    }
+}
+
+function showHighScores() {
+    endScreen.classList.add("hide");
+    scoresLink.classList.remove("hide");
+
+    var highScoresList = document.getElementById("highScoresList");
+    highScoresList.innerHTML = "";
+
+    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+    for (var i = 0; i < highScores.length; i++) {
+        var scoreEntry = document.createElement("li");
+        scoreEntry.textContent = highScores[i].initials + " - " + highScores[i].score;
+        highScoresList.appendChild(scoreEntry);
+    }
+}
+scoresLink.addEventListener("click", function () {
+    startScreen.classList.add("hide");
+    quizContainer.classList.add("hide");
+    endScreen.classList.add("hide");
+    scoresLink.classList.remove("hide");
+    showHighScores();
+});
+
+var goBackButton = document.getElementById("goBack");
+goBackButton.addEventListener("click", function () {
+    startScreen.classList.remove("hide");
+    scoresLink.classList.remove("hide");
+    endScreen.classList.add("hide");
+});
+
+
+var clearScoresButton = document.getElementById("clearScores");
+clearScoresButton.addEventListener("click", function () {
+    localStorage.removeItem("highScores");
+    showHighScores();
+});
