@@ -16,3 +16,4 @@ var questions = [
         answer: "y"
     }
 ];
+questions.sort(() => Math.random() - 0.5);

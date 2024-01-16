@@ -10,7 +10,7 @@ var submitButton = document.getElementById("submit");
 var timerDisplay = document.getElementById("time");
 var startButton = document.getElementById("start");
 var feedbackContainer = document.getElementById("feedback");
-var scoresLink = document.querySelector(".scores a");
+var scoresLink = document.getElementById("scoresLink");
 var currentQuestionIndex = 0;
 var timerInterval;
 var timeLeft = 60;
@@ -60,6 +60,21 @@ function displayQuestion() {
     choiceButtons.forEach(function (button) {
         button.addEventListener("click", checkAnswer);
     });
+}
+function showFeedback(message, className) {
+    
+    var feedbackElement = document.createElement("div");
+    feedbackElement.className = "feedback " + className;
+    feedbackElement.textContent = message;
+
+   
+    feedbackContainer.innerHTML = "";
+    feedbackContainer.appendChild(feedbackElement);
+
+  
+    setTimeout(function () {
+        feedbackContainer.innerHTML = "";
+    }, 1000);
 }
 
 function checkAnswer(event) {

@@ -1,27 +1,32 @@
 
-var highScore = document.querySelector("#highScore");
-var clear = document.querySelector("#clear");
-var goBack = document.querySelector("#goBack");  
- 
-//event listener click
-clear.addEventListener("click", function () {
-    localStorage.clear();
-    highScore.innerHTML= "";
-});
-
-
-var allScores = localStorage.getItem("allScores");
-allScores=localStorage.getItem("allScores");
-allScores=JSON.parse(allScores);
-
-if (allScores !==null) {
-    for (let i = 0; i < allScores.length; i++) {
-        var createLi = document.createElement("li");
-        createLi.textContent = allScores[i].initials + " "+allScores[i].score;
-        highScore.appendChild(createLi);
-         }
-        }
-
-goBack.addEventListener("click", function () {
-    window.location.replace("./index.html");
-});
+document.addEventListener("DOMContentLoaded", function () {
+    let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+  console.log(highscores);
+    function displayHighscores() {
+      const highscoresList = document.getElementById("highscores");
+    
+    if (highscoresList) {
+        highscoresList.innerHTML = "";
+  
+        highscores.forEach((score, index) => {
+          const li = document.createElement("li");
+          console.log(score)
+          if (score.initials) {
+            li.textContent = `${score.initials}: Score - ${score.score}`;
+            highscoresList.appendChild(li);
+          }
+        });
+      }
+    }
+    function clearHighscores() {
+      highscores = [];
+      localStorage.removeItem("highscores");
+      displayHighscores();
+    }
+  
+    const clearButton = document.getElementById("clear");
+    if (clearButton) {
+      clearButton.addEventListener("click", clearHighscores);
+    }
+     displayHighscores();
+  });
