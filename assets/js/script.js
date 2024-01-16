@@ -10,17 +10,16 @@ var submitButton = document.getElementById("submit");
 var timerDisplay = document.getElementById("time");
 var startButton = document.getElementById("start");
 var feedbackContainer = document.getElementById("feedback");
-var scoresLink = document.querySelector("highscores");
+var scoresLink = document.querySelector(".scores a");
 var currentQuestionIndex = 0;
 var timerInterval;
-var feedbackContainer = document.getElementById("feedback");
 var timeLeft = 60;
 
 
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
 
-import { questions } from './questions.js';
+import { questions } from './assets/js/questions.js';
 document.addEventListener('click', function (event) {
     if (event.target.id === 'start') {
         startQuiz();
