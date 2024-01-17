@@ -63,17 +63,16 @@ function displayQuestion() {
 }
 
 function showFeedback(message, className) {
-    var feedbackElement = document.createElement("div");
-    feedbackElement.className = "feedback " + className;
+    var feedbackElement = document.getElementById("feedback");
     feedbackElement.textContent = message;
-
-    feedbackContainer.innerHTML = "";
-    feedbackContainer.appendChild(feedbackElement);
+    feedbackElement.className = "feedback " + className;
 
     setTimeout(function () {
-        feedbackContainer.innerHTML = "";
+        feedbackElement.textContent = "";
+        feedbackElement.className = "feedback hide";
     }, 1000);
 }
+
 
 function playSound(source) {
     var audio = new Audio(source);
