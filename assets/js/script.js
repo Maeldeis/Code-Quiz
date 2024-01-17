@@ -15,13 +15,26 @@ var timerDisplay = document.getElementById("time");
 var startButton = document.getElementById("start");
 var feedbackContainer = document.getElementById("feedback");
 var scoresLink = document.getElementById("scoresLink");
+var goBackButton = document.getElementById("goBack");
+var clearScoresButton = document.getElementById("clearScores");
 
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
 scoresLink.addEventListener("click", showHighScores);
+goBackButton.addEventListener("click", function () {
+    startScreen.classList.remove("hide");
+    scoresLink.classList.remove("hide");
+    endScreen.classList.add("hide");
+});
+clearScoresButton.addEventListener("click", function () {
+    localStorage.removeItem("highScores");
+    showHighScores();
+});
+
 function shuffleQuestions() {
     questions.sort(() => Math.random() - 0.5);
 }
+
 function startQuiz() {
     startScreen.classList.add("hide");
     quizContainer.classList.remove("hide");
@@ -61,6 +74,7 @@ function showFeedback(message, className) {
         feedbackContainer.innerHTML = "";
     }, 1000);
 }
+
 function checkAnswer(event) {
     var selectedAnswerText = event.target.textContent;
     var currentQuestion = questions[currentQuestionIndex];
@@ -84,7 +98,6 @@ function checkAnswer(event) {
         endQuiz();
     }
 }
-
 
 function startTimer() {
     timerInterval = setInterval(function () {
@@ -125,39 +138,45 @@ function storeScore() {
     }
 }
 
-function showHighScores() {
-    endScreen.classList.add("hide");
-    scoresLink.classList.remove("hide");
+document.addEventListener("DOMContentLoaded", function () {
+    let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
 
-    var highScoresList = document.getElementById("highScoresList");
-    highScoresList.innerHTML = "";
+    function displayHighscores() {
+        const highscoresList = document.getElementById("highscores");
 
-    var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        if (highscoresList) {
+            highscoresList.innerHTML = "";
 
-    for (var i = 0; i < highScores.length; i++) {
-        var scoreEntry = document.createElement("li");
-        scoreEntry.textContent = highScores[i].initials + " - " + highScores[i].score;
-        highScoresList.appendChild(scoreEntry);
+            highscores.forEach((score, index) => {
+                const li = document.createElement("li");
+                console.log(score);
+
+                if (score.initials) {
+                    li.textContent = `${score.initials}: Score - ${score.score}`;
+                    highscoresList.appendChild(li);
+                }
+            });
+        }
     }
-}
+
+    function clearHighscores() {
+        highscores = [];
+        localStorage.removeItem("highscores");
+        displayHighscores();
+    }
+
+    const clearButton = document.getElementById("clear");
+    if (clearButton) {
+        clearButton.addEventListener("click", clearHighscores);
+    }
+
+    displayHighscores();
+});
 
 scoresLink.addEventListener("click", function () {
     startScreen.classList.add("hide");
     quizContainer.classList.add("hide");
     endScreen.classList.add("hide");
     scoresLink.classList.remove("hide");
-    showHighScores();
-});
-
-var goBackButton = document.getElementById("goBack");
-goBackButton.addEventListener("click", function () {
-    startScreen.classList.remove("hide");
-    scoresLink.classList.remove("hide");
-    endScreen.classList.add("hide");
-});
-
-var clearScoresButton = document.getElementById("clearScores");
-clearScoresButton.addEventListener("click", function () {
-    localStorage.removeItem("highScores");
     showHighScores();
 });
