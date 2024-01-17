@@ -140,9 +140,12 @@ function storeScore() {
         });
 
         localStorage.setItem("highscores", JSON.stringify(highscores));
-        showHighscores();
+
+        
+        window.location.href = "highscores.html";
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
