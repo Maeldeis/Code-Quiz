@@ -1,19 +1,20 @@
-// Array var object
-export var questions = [
+
+var questions = [
     {
-        question: "what",
-        choices: ["x", "y"],
-        CorrectAnswer: "x"
+        question: "what does js stand for",
+        choices: ["javascript", "just saying"],
+        CorrectAnswer: "javascript"
     },
     {
-        question: "what2",
-        choices: ["x", "y"],
-        CorrectAnswer: "y"
+        question: "what is the purpose of javascript",
+        choices: ["for readability", "to add dynamic content"],
+        CorrectAnswer: "to add dynamic content"
     },
     {
-        question: "what3",
-        choices: ["x", "y"],
-        CorrectAnswer: "y"
+        question: "when was javascript invented",
+        choices: ["1999", "1995"],
+        CorrectAnswer: "1995"
     }
 ];
+
 questions.sort(() => Math.random() - 0.5);

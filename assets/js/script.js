@@ -1,4 +1,8 @@
 var score = 0;
+var currentQuestionIndex = 0;
+var timerInterval;
+var timeLeft = 60;
+
 var startScreen = document.getElementById("start-screen");
 var quizContainer = document.getElementById("questions");
 var questionTitle = document.getElementById("question-title");
@@ -11,14 +15,13 @@ var timerDisplay = document.getElementById("time");
 var startButton = document.getElementById("start");
 var feedbackContainer = document.getElementById("feedback");
 var scoresLink = document.getElementById("scoresLink");
-var currentQuestionIndex = 0;
-var timerInterval;
-var timeLeft = 60;
 
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
 scoresLink.addEventListener("click", showHighScores);
-
+function shuffleQuestions() {
+    questions.sort(() => Math.random() - 0.5);
+}
 function startQuiz() {
     startScreen.classList.add("hide");
     quizContainer.classList.remove("hide");
