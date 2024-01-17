@@ -97,11 +97,11 @@ function checkAnswer(event) {
 
   if (selectedAnswer === correctAnswer) {
     score++;
-    showFeedback("Correct!", "correct");
+    showFeedback("Yep!", "correct");
     playSound('./assets/sfx/correct.wav');
   } else {
     timeLeft -= 10;
-    showFeedback("Wrong!", "wrong");
+    showFeedback("Nope!", "wrong");
     playSound('./assets/sfx/incorrect.wav');
   }
 
