@@ -14,13 +14,13 @@ var submitButton = document.getElementById("submit");
 var timerDisplay = document.getElementById("time");
 var startButton = document.getElementById("start");
 var feedbackContainer = document.getElementById("feedback");
-var scoresLink = document.getElementById("scoresLink");
+var scoresLink = document.querySelector(".scores a"); // Updated selector
 var goBackButton = document.getElementById("goBack");
 var clearScoresButton = document.getElementById("clearScores");
 
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
-scoresLink.addEventListener("click", showHighScores);
+scoresLink.addEventListener("click", showHighscores);
 goBackButton.addEventListener("click", function () {
     startScreen.classList.remove("hide");
     scoresLink.classList.remove("hide");
@@ -28,7 +28,7 @@ goBackButton.addEventListener("click", function () {
 });
 clearScoresButton.addEventListener("click", function () {
     localStorage.removeItem("highScores");
-    showHighScores();
+    showHighscores();
 });
 
 function shuffleQuestions() {
@@ -80,7 +80,7 @@ function checkAnswer(event) {
     var currentQuestion = questions[currentQuestionIndex];
 
     var selectedAnswer = selectedAnswerText;
-    var correctAnswer = currentQuestion.correctAnswer; 
+    var correctAnswer = currentQuestion.correctAnswer;
 
     if (selectedAnswer === correctAnswer) {
         score++;
@@ -122,19 +122,19 @@ function storeScore() {
     var userInitials = initialsInput.value.trim();
 
     if (userInitials !== "") {
-        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
         var newScore = {
             initials: userInitials,
             score: score
         };
 
-        highScores.push(newScore);
-        highScores.sort(function (a, b) {
+        highscores.push(newScore);
+        highscores.sort(function (a, b) {
             return b.score - a.score;
         });
 
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        showHighScores();
+        localStorage.setItem("highscores", JSON.stringify(highscores));
+        showHighscores();
     }
 }
 
@@ -178,5 +178,5 @@ scoresLink.addEventListener("click", function () {
     quizContainer.classList.add("hide");
     endScreen.classList.add("hide");
     scoresLink.classList.remove("hide");
-    showHighScores();
+    showHighscores();
 });
