@@ -61,22 +61,19 @@ function showFeedback(message, className) {
         feedbackContainer.innerHTML = "";
     }, 1000);
 }
-
 function checkAnswer(event) {
     var selectedAnswerText = event.target.textContent;
     var currentQuestion = questions[currentQuestionIndex];
 
-    if (currentQuestion.choices) {
-        var selectedAnswer = selectedAnswerText;
-        var correctAnswer = currentQuestion.answer;
+    var selectedAnswer = selectedAnswerText;
+    var correctAnswer = currentQuestion.correctAnswer; 
 
-        if (selectedAnswer === correctAnswer) {
-            score++;
-            showFeedback("Correct!", "correct");
-        } else {
-            timeLeft -= 10;
-            showFeedback("Wrong!", "wrong");
-        }
+    if (selectedAnswer === correctAnswer) {
+        score++;
+        showFeedback("Correct!", "correct");
+    } else {
+        timeLeft -= 10;
+        showFeedback("Wrong!", "wrong");
     }
 
     currentQuestionIndex++;
@@ -87,6 +84,7 @@ function checkAnswer(event) {
         endQuiz();
     }
 }
+
 
 function startTimer() {
     timerInterval = setInterval(function () {
