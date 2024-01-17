@@ -1,19 +1,19 @@
 // Array var object
-const questions = [
+export var questions = [
     {
         question: "what",
         choices: ["x", "y"],
-        answer: "x"
+        CorrectAnswer: "x"
     },
     {
         question: "what2",
         choices: ["x", "y"],
-        answer: "y"
+        CorrectAnswer: "y"
     },
     {
         question: "what3",
         choices: ["x", "y"],
-        answer: "y"
+        CorrectAnswer: "y"
     }
 ];
 questions.sort(() => Math.random() - 0.5);
