@@ -14,7 +14,7 @@ var submitButton = document.getElementById("submit");
 var timerDisplay = document.getElementById("time");
 var startButton = document.getElementById("start");
 var feedbackContainer = document.getElementById("feedback");
-var scoresLink = document.querySelector(".scores a"); // Updated selector
+var scoresLink = document.querySelector(".scores a"); 
 var goBackButton = document.getElementById("goBack");
 var clearScoresButton = document.getElementById("clearScores");
 
@@ -75,6 +75,11 @@ function showFeedback(message, className) {
     }, 1000);
 }
 
+function playSound(source) {
+    var audio = new Audio(source);
+    audio.play();
+}
+
 function checkAnswer(event) {
     var selectedAnswerText = event.target.textContent;
     var currentQuestion = questions[currentQuestionIndex];
@@ -85,9 +90,11 @@ function checkAnswer(event) {
     if (selectedAnswer === correctAnswer) {
         score++;
         showFeedback("Correct!", "correct");
+        playSound('./assets/sfx/correct.wav'); 
     } else {
         timeLeft -= 10;
         showFeedback("Wrong!", "wrong");
+        playSound('./assets/sfx/incorrect.wav'); 
     }
 
     currentQuestionIndex++;
