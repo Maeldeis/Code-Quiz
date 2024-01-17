@@ -1,5 +1,5 @@
 // Array var object
-var questions = [
+const questions = [
     {
         question: "what",
         choices: ["x", "y"],

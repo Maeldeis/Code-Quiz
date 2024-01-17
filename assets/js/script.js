@@ -15,21 +15,9 @@ var currentQuestionIndex = 0;
 var timerInterval;
 var timeLeft = 60;
 
-
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", storeScore);
-
-import { questions } from './assets/js/questions.js';
-document.addEventListener('click', function (event) {
-    if (event.target.id === 'start') {
-        startQuiz();
-    } else if (event.target.id === 'submit') {
-        storeScore();
-    }  else if (event.target.id === 'scoresLink') {
-        showHighScores();
-    }
-});
-
+scoresLink.addEventListener("click", showHighScores);
 
 function startQuiz() {
     startScreen.classList.add("hide");
@@ -44,34 +32,28 @@ function displayQuestion() {
     var questionText = currentQuestion.question;
     var choices = currentQuestion.choices;
 
-    var questionTitleEl = questionTitle;
-    var choicesEl = choicesContainer;
-    
-
-    questionTitleEl.textContent = "Question: " + questionText;
-    choicesEl.innerHTML = "";
+    questionTitle.textContent = "Question: " + questionText;
+    choicesContainer.innerHTML = "";
 
     for (var i = 0; i < choices.length; i++) {
         var buttonHTML = `<button>${choices[i]}</button>`;
-        choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
+        choicesContainer.insertAdjacentHTML('beforeend', buttonHTML);
     }
 
-    var choiceButtons = document.querySelectorAll("#choicesEl button");
+    var choiceButtons = document.querySelectorAll("#choices button");
     choiceButtons.forEach(function (button) {
         button.addEventListener("click", checkAnswer);
     });
 }
+
 function showFeedback(message, className) {
-    
     var feedbackElement = document.createElement("div");
     feedbackElement.className = "feedback " + className;
     feedbackElement.textContent = message;
 
-   
     feedbackContainer.innerHTML = "";
     feedbackContainer.appendChild(feedbackElement);
 
-  
     setTimeout(function () {
         feedbackContainer.innerHTML = "";
     }, 1000);
@@ -157,6 +139,7 @@ function showHighScores() {
         highScoresList.appendChild(scoreEntry);
     }
 }
+
 scoresLink.addEventListener("click", function () {
     startScreen.classList.add("hide");
     quizContainer.classList.add("hide");
@@ -171,7 +154,6 @@ goBackButton.addEventListener("click", function () {
     scoresLink.classList.remove("hide");
     endScreen.classList.add("hide");
 });
-
 
 var clearScoresButton = document.getElementById("clearScores");
 clearScoresButton.addEventListener("click", function () {
