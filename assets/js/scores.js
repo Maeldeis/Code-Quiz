@@ -1,16 +1,11 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-    let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
-  console.log(highscores);
+    var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
     function displayHighscores() {
-      const highscoresList = document.getElementById("highscores");
-    
-    if (highscoresList) {
+      var highscoresList = document.getElementById("highscores");
+      if (highscoresList) {
         highscoresList.innerHTML = "";
-  
         highscores.forEach((score, index) => {
-          const li = document.createElement("li");
-          console.log(score)
+          var li = document.createElement("li");
           if (score.initials) {
             li.textContent = `${score.initials}: Score - ${score.score}`;
             highscoresList.appendChild(li);
@@ -23,8 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("highscores");
       displayHighscores();
     }
-  
-    const clearButton = document.getElementById("clear");
+    var clearButton = document.getElementById("clear");
     if (clearButton) {
       clearButton.addEventListener("click", clearHighscores);
     }
